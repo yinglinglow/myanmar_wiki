@@ -22,7 +22,19 @@ class MyanmarSpider(scrapy.Spider):
 
     def parse_org_page(self, response):
         name = response.css('h1#firstHeading::text').extract_first()
-        cause_areas = response.css('table.infobox.vcard>tr>td>a::text').extract()
+        
+        # to find cause_areas
+        len_tr = response.css('table.infobox.vcard>tr>th::text').extract()
+        print(len_tr)
+        i = 1
+        cause = 0
+        for text in len_tr:
+            if text == 'Focus':
+                cause = i
+            i += 1
+
+        cause_areas = response.css('table.infobox.vcard>tr:nth-child(' + str(cause + 2) +')>td>a::text').extract()
+        
         yield {'name': name,
             'cause_areas': cause_areas
             # 'location' : ,
