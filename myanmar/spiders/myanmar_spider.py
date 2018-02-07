@@ -22,7 +22,22 @@ class MyanmarSpider(scrapy.Spider):
 
     def parse_org_page(self, response):
         name = response.css('h1#firstHeading::text').extract_first()
-        yield {'name': name} 
+        cause_areas = response.css('table.infobox.vcard>tr>td>a::text').extract()
+        yield {'name': name,
+            'cause_areas': cause_areas
+            # 'location' : ,
+            # 'website' : ,
+            # 'programme_type' : ,
+            # 'other_info' : ,
+            # 'headcount' : ,
+            # 'financials' : ,
+            # 'established' : ,
+            # 'religious' : ,
+            # 'registered' : ,
+            # 'outputs' : ,
+            # 'mission' : ,
+            # 'theory_of_change' : 
+            } 
         
         
         # soup = BeautifulSoup(response.text, "lxml")
