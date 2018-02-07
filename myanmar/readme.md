@@ -1,0 +1,1 @@
+To run: scrapy crawl myanmar -o myanmar_links.csv -t csv
