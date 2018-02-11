@@ -21,24 +21,29 @@ class MyanmarSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse_org_page)
 
     def parse_org_page(self, response):
+
+        # to extract name
         name = response.css('h1#firstHeading::text').extract_first()
         
-        # to find cause_areas
-        len_tr = response.css('table.infobox.vcard>tr>th::text').extract()
-        print(len_tr)
-        i = 1
-        cause = 0
-        for text in len_tr:
-            if text == 'Focus':
-                cause = i
-            i += 1
+        # to extract all tr and td content
+        all_tr = response.css('table.infobox.vcard>tr').extract() # obtain all th
+        td_text = response.css('table.infobox.vcard>tr>td').extract() # obtain all td
+        td_content_list = [BeautifulSoup(td).get_text() for td in td_text]
 
-        cause_areas = response.css('table.infobox.vcard>tr:nth-child(' + str(cause + 2) +')>td>a::text').extract()
+        # to extract cause
+        cause = 'NA'
+        for i, text in enumerate(all_tr):
+            if 'Focus' in text:
+                cause = i
+        if cause != 'NA':
+            cause_areas = td_content_list[cause]
+        else:
+            cause_areas = cause
         
         yield {'name': name,
-            'cause_areas': cause_areas
-            # 'location' : ,
-            # 'website' : ,
+            'cause_areas': cause_areas,
+            #'location' : all_tr,
+            #'website' : td_content_list
             # 'programme_type' : ,
             # 'other_info' : ,
             # 'headcount' : ,
@@ -49,7 +54,7 @@ class MyanmarSpider(scrapy.Spider):
             # 'outputs' : ,
             # 'mission' : ,
             # 'theory_of_change' : 
-            } 
+            }
         
         
         # soup = BeautifulSoup(response.text, "lxml")
