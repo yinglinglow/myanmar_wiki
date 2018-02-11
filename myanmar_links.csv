@@ -1,14 +1,15 @@
-name,cause_areas
-Myanmar Veterans' Organisation,NA
-Myanmar Women's Affairs Federation,NA
-Myanmar Red Cross Society,NA
-Union of Myanmar Federation of Chambers of Commerce and Industry,Business and Industry advocacy
-Union Solidarity and Development Association,NA
-Myanmar Writers and Journalists Association,NA
-Myanmar Motion Picture Organisation,NA
-Myanmar Maternal and Child Welfare Association,promoting the health and well being of mothers and children
-Myanmar Medical Association,NA
-Myanmar Dental Association,NA
-Myanmar Christian Fellowship of the Blind,"Well-being of all blind people, especially children aged from 5 to 25 no matter sex, race or religion"
-Foreign Correspondents' Club of Myanmar,NA
-Biodiversity and Nature Conservation Association,"Conservation, Biodiversity, Sustainable development"
+name,cause_area,location,website
+Myanmar Veterans' Organisation,NA,NA,NA
+Myanmar Red Cross Society,NA,NA,myanmarredcrosssociety.org
+Union Solidarity and Development Association,NA,Yangon,www.usda.org.mm
+Union of Myanmar Federation of Chambers of Commerce and Industry,Business and Industry advocacy,Yangon,www.umfcci.com.mm
+Myanmar Writers and Journalists Association,NA,NA,mwja.org/mmsite/
+Myanmar Women's Affairs Federation,NA,NA,NA
+Myanmar Motion Picture Organisation,NA,NA,NA
+Myanmar Maternal and Child Welfare Association,promoting the health and well being of mothers and children,"South Okkalapa Township, Yangon, Myanmar",www.mmcwa-myanmar.org
+Myanmar Medical Association,NA,Myanmar,www.mmacentral.org
+Myanmar Dental Association,NA,Myanmar,"www.mda-myanmar.org
+mdayangon.org"
+Myanmar Christian Fellowship of the Blind,"Well-being of all blind people, especially children aged from 5 to 25 no matter sex, race or religion","(Kawaichan), Yangon, Myanmar, and Myitkyina, Kachin State, Myanmar",www.mcfblind.com/index.htm
+Foreign Correspondents' Club of Myanmar,NA,NA,NA
+Biodiversity and Nature Conservation Association,"Conservation, Biodiversity, Sustainable development","Yangon, Burma",banca-env.org

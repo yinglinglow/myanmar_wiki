@@ -30,21 +30,41 @@ class MyanmarSpider(scrapy.Spider):
         td_text = response.css('table.infobox.vcard>tr>td').extract() # obtain all td
         td_content_list = [BeautifulSoup(td).get_text() for td in td_text]
 
-        # to extract cause
+        # to extract each of the fields:
         cause = 'NA'
+        location = 'NA'
+        website = 'NA'
         for i, text in enumerate(all_tr):
             if 'Focus' in text:
                 cause = i
+            elif 'Location' in text:
+                location = i
+            elif 'Website' in text:
+                website = i
+
+        # cause
         if cause != 'NA':
             cause_areas = td_content_list[cause]
         else:
             cause_areas = cause
         
+        # location
+        if location != 'NA':
+            location_area = td_content_list[location].strip()
+        else:
+            location_area = location
+
+        # website
+        if website != 'NA':
+            website_link = td_content_list[website].strip()
+        else:
+            website_link = website
+
         yield {'name': name,
-            'cause_areas': cause_areas,
-            #'location' : all_tr,
-            #'website' : td_content_list
-            # 'programme_type' : ,
+            'cause_area': cause_areas,
+            'location' : location_area,
+            'website' : website_link
+            # 'programme_types' : ,
             # 'other_info' : ,
             # 'headcount' : ,
             # 'financials' : ,
@@ -57,9 +77,8 @@ class MyanmarSpider(scrapy.Spider):
             }
         
         
-        # soup = BeautifulSoup(response.text, "lxml")
-        # items = []
 
-        # for link in soup.find("div", {"class":"mw-content-text"})
-        #     .find_all('a', href=True): # finds all links to job pages
-        #     yield {'link': link['href']} # assigns links under link
+        """
+        ['name', 'cause_areas', 'location', 'website', 'programme_type', 'other_info', 'headcount', 
+        'financials', 'established', 'religious', 'registered', 'outputs', 'mission','theory_of_change']
+        """

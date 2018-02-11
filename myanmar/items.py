@@ -9,10 +9,10 @@ import scrapy
 
 class MyanmarItem(scrapy.Item):
     name = scrapy.Field()
-    cause_areas = scrapy.Field()
+    cause_area = scrapy.Field()
     location = scrapy.Field()
     website = scrapy.Field()
-    programme_type = scrapy.Field()
+    programme_types = scrapy.Field()
     other_info = scrapy.Field()
     headcount = scrapy.Field()
     financials = scrapy.Field()
@@ -22,6 +22,9 @@ class MyanmarItem(scrapy.Item):
     outputs = scrapy.Field()
     mission = scrapy.Field()
     theory_of_change = scrapy.Field()
+    description = scrapy.Field()
+    address = scrapy.Field()
+    contact_number = scrapy.Field()
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
