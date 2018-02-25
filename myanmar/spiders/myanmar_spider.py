@@ -94,7 +94,6 @@ class MyanmarSpider(scrapy.Spider):
             'city' : location_area,
             'programme_types' : method,
             # 'address': ,
-            # 'city' : ,
             # 'contact_number' : ,
             # 'email' : ,
             # 'contact_person' : ,
