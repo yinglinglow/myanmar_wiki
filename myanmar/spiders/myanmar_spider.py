@@ -64,32 +64,30 @@ class MyanmarSpider(scrapy.Spider):
         intro_para = ''.join(response.css('div.mw-parser-output>p:first-of-type *::text').extract())
 
         # mission
-        try: 
-            mission_id_m = ''.join(response.css("div.mw-parser-output>h2>span[id*='mission']::attr(id)").extract())
-            mission_id_M = ''.join(response.css("div.mw-parser-output>h2>span[id*='Mission']::attr(id)").extract())
-            if len(mission_id_m) > 0:
-                string = "div.mw-parser-output>h2>span#%s::text"% (mission_id_m)
-            if len(mission_id_M) > 0:
-                string = "div.mw-parser-output>h2>span#%s::text" % (mission_id_M)
-            mission = response.css(string).extract()
-        except:
-            mission = 'NA'
+        # try: 
+        #     mission_id_m = ''.join(response.css("div.mw-parser-output>h2>span[id*='mission']::attr(id)").extract())
+        #     mission_id_M = ''.join(response.css("div.mw-parser-output>h2>span[id*='Mission']::attr(id)").extract())
+        #     if len(mission_id_m) > 0:
+        #         string = "div.mw-parser-output>h2>span#%s::text"% (mission_id_m)
+        #     if len(mission_id_M) > 0:
+        #         string = "div.mw-parser-output>h2>span#%s::text" % (mission_id_M)
+        #     mission = response.css(string).extract()
+        # except:
+        #     mission = 'NA'
 
         yield {'name': name,
-            'cause_area': cause_areas,
-            'location' : location_area,
+            'description' : intro_para,
             'website' : website_link,
-            'established/ intro statement' : intro_para,
-            # 'programme_types' : ,
-            # 'other_info' : ,
-            # 'headcount' : ,
-            # 'financials' : ,
+            'cause_area': cause_areas,
+            'country': 'Myanmar',
+            'city' : location_area,
 
-            # 'religious' : ,
-            # 'registered' : ,
-            # 'outputs' : ,
-            'mission' : mission,
-            # 'theory_of_change' : 
+            # 'programme_types' : ,
+            # 'address': ,
+            # 'city' : ,
+            # 'contact_number' : ,
+            # 'email' : ,
+            # 'contact_person' : ,
             }
         
         
