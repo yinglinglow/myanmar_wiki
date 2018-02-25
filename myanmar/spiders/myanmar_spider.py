@@ -22,15 +22,12 @@ class MyanmarSpider(scrapy.Spider):
 
     def parse_org_page(self, response):
 
-        # to extract name
-        name = response.css('h1#firstHeading::text').extract_first()
-        
-        # to extract all tr and td content
+        # extracting all tr and td content
         all_tr = response.css('table.infobox.vcard>tr').extract() # obtain all th
         td_text = response.css('table.infobox.vcard>tr>td').extract() # obtain all td
         td_content_list = [BeautifulSoup(td).get_text() for td in td_text]
 
-        # to extract each of the fields:
+        # extracting each of the fields:
         cause = 'NA'
         location = 'NA'
         website = 'NA'
@@ -41,6 +38,9 @@ class MyanmarSpider(scrapy.Spider):
                 location = i
             elif 'Website' in text:
                 website = i
+
+        # name
+        name = response.css('h1#firstHeading::text').extract_first()
 
         # cause
         if cause != 'NA':
@@ -60,19 +60,35 @@ class MyanmarSpider(scrapy.Spider):
         else:
             website_link = website
 
+        # established (first intro para)
+        intro_para = ''.join(response.css('div.mw-parser-output>p:first-of-type *::text').extract())
+
+        # mission
+        try: 
+            mission_id_m = ''.join(response.css("div.mw-parser-output>h2>span[id*='mission']::attr(id)").extract())
+            mission_id_M = ''.join(response.css("div.mw-parser-output>h2>span[id*='Mission']::attr(id)").extract())
+            if len(mission_id_m) > 0:
+                string = "div.mw-parser-output>h2>span#%s::text"% (mission_id_m)
+            if len(mission_id_M) > 0:
+                string = "div.mw-parser-output>h2>span#%s::text" % (mission_id_M)
+            mission = response.css(string).extract()
+        except:
+            mission = 'NA'
+
         yield {'name': name,
             'cause_area': cause_areas,
             'location' : location_area,
-            'website' : website_link
+            'website' : website_link,
+            'established/ intro statement' : intro_para,
             # 'programme_types' : ,
             # 'other_info' : ,
             # 'headcount' : ,
             # 'financials' : ,
-            # 'established' : ,
+
             # 'religious' : ,
             # 'registered' : ,
             # 'outputs' : ,
-            # 'mission' : ,
+            'mission' : mission,
             # 'theory_of_change' : 
             }
         
