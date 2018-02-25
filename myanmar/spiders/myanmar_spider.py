@@ -54,6 +54,8 @@ class MyanmarSpider(scrapy.Spider):
         # location
         if location != 'NA':
             location_area = td_content_list[location].strip()
+            if location_area == 'Myanmar': # remove duplicates with country
+                location_area = 'NA'
         else:
             location_area = location
 
