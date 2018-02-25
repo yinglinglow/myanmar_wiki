@@ -2,14 +2,14 @@ import scrapy
 from bs4 import BeautifulSoup
 from myanmar.items import MyanmarItem
 
-class MyanmarSpider(scrapy.Spider):
-    country = "Myanmar"
-    name = "myanmar"
+class ThailandSpider(scrapy.Spider):
+    country = 'Thailand'
+    name = "thailand"
     allowed_domains = ["en.wikipedia.org"]
 
     def start_requests(self):
         urls = [
-            'https://en.wikipedia.org/wiki/List_of_official_social_and_NGO_organisations_in_Myanmar',
+            'https://en.wikipedia.org/wiki/List_of_non-governmental_organizations_in_Thailand',
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
