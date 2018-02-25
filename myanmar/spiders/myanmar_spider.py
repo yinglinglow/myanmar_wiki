@@ -31,6 +31,7 @@ class MyanmarSpider(scrapy.Spider):
         cause = 'NA'
         location = 'NA'
         website = 'NA'
+        method = 'NA'
         for i, text in enumerate(all_tr):
             if 'Focus' in text:
                 cause = i
@@ -38,6 +39,8 @@ class MyanmarSpider(scrapy.Spider):
                 location = i
             elif 'Website' in text:
                 website = i
+            elif 'Method' in text:
+                method = i
 
         # name
         name = response.css('h1#firstHeading::text').extract_first()
@@ -60,6 +63,12 @@ class MyanmarSpider(scrapy.Spider):
         else:
             website_link = website
 
+        # method
+        if method != 'NA':
+            method = td_content_list[method].strip()
+        else:
+            method = method
+
         # established (first intro para)
         intro_para = ''.join(response.css('div.mw-parser-output>p:first-of-type *::text').extract())
 
@@ -81,8 +90,7 @@ class MyanmarSpider(scrapy.Spider):
             'cause_area': cause_areas,
             'country': 'Myanmar',
             'city' : location_area,
-
-            # 'programme_types' : ,
+            'programme_types' : method,
             # 'address': ,
             # 'city' : ,
             # 'contact_number' : ,
